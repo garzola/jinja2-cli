@@ -1,10 +1,13 @@
 
 [project]
 name = "jinja2-cli"
-version = "0.9.4"
+version = "0.9.5"
 description = "A CLI interface to Jinja2"
 #license = "BSD"
-authors = [{ name = "Matt Robenolt", email = "matt@ydekproductions.com" }]
+authors = [
+    { name = "Matt Robenolt", email = "matt@ydekproductions.com" },
+    { name = "Gustavo Arzola", email = "gustavo@xcode.com" },
+    ]
 requires-python = "~=3.13.0"
 readme = "README.md"
 
@@ -18,41 +21,22 @@ dependencies = [
     "jinja2",
 ]
 
+[project.scripts]
+jinja2 = "jinja2cli:main"
+
 [project.optional-dependencies]
-hjson = [
-    "hjson",
-    "jinja2",
-]
-json5 = [
-    "jinja2",
-    "json5",
-]
-tests = [
-    "flake8",
-    "jinja2",
-    "pytest",
-]
-toml = [
-    "jinja2",
-    "toml",
-]
-xml = [
-    "jinja2",
-    "xmltodict",
-]
-yaml = [
-    "jinja2",
-    "pyyaml",
-]
+hjson = ["hjson"]
+json5 = ["json5"]
+tests = ["flake8","pytest"]
+toml = ["toml"]
+xml = ["xmltodict"]
+yaml = ["pyyaml"]
 
 [tool.uv]
 default-groups = []
 
 [tool.hatch.build.targets.sdist]
 include = ["src/jinja2cli"]
-
-[project.scripts]
-jinja2 = "jinja2cli:main"
 
 [tool.hatch.build.targets.wheel]
 include = ["src/jinja2cli"]
@@ -61,7 +45,7 @@ include = ["src/jinja2cli"]
 "src/jinja2cli" = "jinja2cli"
 
 [project.urls]
-Homepage = "https://github.com/mattrobenolt/jinja2-cli"
+Homepage = "https://github.com/garzola/jinja2-cli"
 
 [build-system]
 requires = ["hatchling"]

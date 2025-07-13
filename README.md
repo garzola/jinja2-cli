@@ -8,7 +8,15 @@ $ curl -s http://httpbin.org/ip | jinja2 helloip.tmpl > helloip.html
 ```
 
 ## Install
+
+### pip
 `$ pip install jinja2-cli`
+
+### pipx
+`$ pipx install jinja2-cli[toml,yml]`
+
+### uv (install like pipx)
+`$ uv tool install https://github.com/garzola/jinja2-cli.git --with toml,yml`
 
 ## Usage
 ```
