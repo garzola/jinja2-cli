@@ -271,7 +271,8 @@ def render(template_path, data, extensions, strict=False,includes=None):
     env = Environment(
         loader=FileSystemLoader([os.path.dirname(template_path)] + includes),
         extensions=extensions,
-        keep_trailing_newline=True,
+        keep_trailing_newline=False,
+	trim_blocks=True,
     )
     if strict:
         env.undefined = StrictUndefined
