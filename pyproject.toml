@@ -1,0 +1,68 @@
+
+[project]
+name = "jinja2-cli"
+version = "0.9.0"
+description = "A CLI interface to Jinja2"
+#license = "BSD"
+authors = [{ name = "Matt Robenolt", email = "matt@ydekproductions.com" }]
+requires-python = "~=3.13.0"
+readme = "README.md"
+
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development",
+]
+dependencies = [
+    "jinja2",
+]
+
+[project.optional-dependencies]
+hjson = [
+    "hjson",
+    "jinja2",
+]
+json5 = [
+    "jinja2",
+    "json5",
+]
+tests = [
+    "flake8",
+    "jinja2",
+    "pytest",
+]
+toml = [
+    "jinja2",
+    "toml",
+]
+xml = [
+    "jinja2",
+    "xmltodict",
+]
+yaml = [
+    "jinja2",
+    "pyyaml",
+]
+
+[tool.uv]
+default-groups = []
+
+[tool.hatch.build.targets.sdist]
+include = ["src/jinja2cli"]
+
+[project.scripts]
+jinja2 = "jinja2cli:main"
+
+[tool.hatch.build.targets.wheel]
+include = ["src/jinja2cli"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src/jinja2cli" = "jinja2cli"
+
+[project.urls]
+Homepage = "https://github.com/mattrobenolt/jinja2-cli"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

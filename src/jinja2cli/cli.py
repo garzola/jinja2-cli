@@ -246,7 +246,7 @@ formats = {
 }
 
 
-def render(template_path, data, extensions, strict=False):
+def render(template_path, data, extensions, strict=False,includes=None):
     from jinja2 import (
         __version__ as jinja_version,
         Environment,
@@ -265,8 +265,11 @@ def render(template_path, data, extensions, strict=False):
             if ext not in extensions:
                 extensions.append(ext)
 
+    if includes is None:
+        includes = []
+
     env = Environment(
-        loader=FileSystemLoader(os.path.dirname(template_path)),
+        loader=FileSystemLoader([os.path.dirname(template_path)] + includes),
         extensions=extensions,
         keep_trailing_newline=True,
     )
@@ -366,7 +369,7 @@ def cli(opts, args):
 
         out = codecs.getwriter("utf8")(out)
 
-    out.write(render(template_path, data, extensions, opts.strict))
+    out.write(render(template_path, data, extensions, opts.strict, includes=opts.includes))
     out.flush()
     return 0
 
@@ -424,8 +427,7 @@ def main():
     parser.add_option(
         "-f",
         "--format",
-        help=lambda: "format of input variables: %s"
-        % ", ".join(sorted(list(get_available_formats()))),
+        help=lambda: "format of input variables: %s" % ", ".join(sorted(list(get_available_formats()))),
         dest="format",
         action="store",
         default="auto",
@@ -443,6 +445,13 @@ def main():
         help="Define template variable in the form of key=value",
         action="append",
         metavar="key=value",
+    )
+    parser.add_option(
+        "-I",
+        "--includes",
+        help="Extra jinja2 template directory to search for (included/imported) templates",
+        dest="includes",
+        action="append",
     )
     parser.add_option(
         "-s",
